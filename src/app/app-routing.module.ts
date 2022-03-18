@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {FullComponent} from "./layouts/full/full.component";
 import {BlankComponent} from "./layouts/blank/blank.component";
 import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./services/auth/auth.guard";
 
 const routes: Routes = [
   {
@@ -16,11 +17,13 @@ const routes: Routes = [
     children: [
       {
         path: 'countries',
-        loadChildren: () => import('./country/country.module').then(m => m.CountryModule)
+        loadChildren: () => import('./country/country.module').then(m => m.CountryModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'cities',
-        loadChildren: () => import('./city/city.module').then(m => m.CityModule)
+        loadChildren: () => import('./city/city.module').then(m => m.CityModule),
+        canActivate: [AuthGuard]
       }
     ]
   },

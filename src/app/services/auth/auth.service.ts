@@ -10,6 +10,10 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(data: {email: string, password: string}): Observable<any> {
-    return this.http.post<any>('https://taskfrontendapi.azurewebsites.net/api/user/login', data);
+    return this.http.post<{token: string}>('https://taskfrontendapi.azurewebsites.net/api/user/login', data);
+  }
+
+  checkToken(): boolean {
+    return !!localStorage.getItem('token');
   }
 }
