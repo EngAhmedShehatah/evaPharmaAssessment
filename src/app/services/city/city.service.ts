@@ -27,4 +27,8 @@ export class CityService {
   deleteCity(id: number): Observable<any> {
     return this.http.delete<I_City[]>(this.domain + 'city/' + id);
   }
+
+  getCitiesOfCountry(id: number): Observable<any> {
+    return this.http.get<I_City[]>(this.domain + 'city/getcities/' + id);
+  }
 }

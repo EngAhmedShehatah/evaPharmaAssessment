@@ -10,8 +10,12 @@
               *ngIf="!showAddForm">add new country
       </button>
       <form [hidden]="!showAddForm" [formGroup]="countryForm" (ngSubmit)="onSubmit()">
-        <input type="text" formControlName="name" class="form-control w-50">
-        <button class="btn btn-success py-2 px-4 mt-2 mx-1" type="submit">Save</button>
+        <input type="text" formControlName="name" class="form-control w-50" placeholder="country name">
+        <small class="d-block text-danger" *ngIf="countryForm.dirty && countryForm.get('name')?.invalid">
+          ** name is required
+        </small>
+        <button class="btn btn-success py-2 px-4 mt-2 mx-1" type="submit"
+                [disabled]="countryForm.invalid">Save</button>
         <button class="btn btn-danger py-2 px-4 mt-2 mx-1" type="button" (click)="onCancel()">Cancel</button>
       </form>
     </div>
@@ -27,7 +31,7 @@
         <tbody>
         <tr class="py-1" *ngFor="let country of countries; let i = index">
           <td>{{i + 1}}</td>
-          <td>{{country.name}}</td>
+          <td (click)="openCitiesOfCountry(country.id)" class="name_col">{{country.name}}</td>
           <td>
             <button class="btn btn-outline-primary mx-1" type="button" (click)="onEditCountry(country)">
               <i class="fas fa-edit"></i>

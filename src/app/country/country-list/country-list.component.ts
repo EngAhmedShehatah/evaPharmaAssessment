@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CountryService} from "../../services/country/country.service";
 import {I_Country} from "../../services/country/country.modal";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-country-list',
@@ -18,9 +19,9 @@ export class CountryListComponent implements OnInit {
   });
 
   constructor(
-    private countryService: CountryService
-  ) {
-  }
+    private countryService: CountryService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getCountries();
@@ -80,5 +81,9 @@ export class CountryListComponent implements OnInit {
   onCancel(): void {
     this.showAddForm = false;
     this.countryForm.reset();
+  }
+
+  openCitiesOfCountry(countryId: number): void {
+    this.router.navigateByUrl('/cities/' + countryId);
   }
 }

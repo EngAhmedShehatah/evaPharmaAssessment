@@ -1,3 +1,8 @@
 table {
   vertical-align: middle;
+
+  .name_col:hover {
+    cursor: pointer;
+    background-color: #dedede;
+  }
 }

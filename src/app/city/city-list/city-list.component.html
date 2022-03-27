@@ -10,12 +10,14 @@
               *ngIf="!showAddForm">add new city
       </button>
       <form [hidden]="!showAddForm" [formGroup]="cityForm" (ngSubmit)="onSubmit()">
-        <p-dropdown [options]="countries" optionLabel="name" optionValue="id" [autoDisplayFirst]="false"
-                    styleClass="form-control w-50 mt-2 p-0" formControlName="countryId"></p-dropdown>
+        <p-dropdown [options]="countries" [autoDisplayFirst]="false"
+                    styleClass="form-control w-50 mt-2 p-0" optionLabel="name" optionValue="id"
+                    formControlName="countryId" placeholder="country"
+                    [showClear]="true"></p-dropdown>
         <small class="d-block text-danger" *ngIf="cityForm.dirty && cityForm.get('countryId')?.invalid">
           ** country is required
         </small>
-        <input type="text" formControlName="name" class="form-control w-50 mt-2">
+        <input type="text" formControlName="name" class="form-control w-50 mt-2" placeholder="city name">
         <small class="d-block text-danger" *ngIf="cityForm.dirty && cityForm.get('name')?.invalid">
           ** name is required
         </small>
@@ -39,7 +41,7 @@
         <tr class="py-1" *ngFor="let city of cities; let i = index">
           <td>{{i + 1}}</td>
           <td>{{city.name}}</td>
-          <td>{{city.country}}</td>
+          <td>{{city.country?.name}}</td>
           <td>
             <button class="btn btn-outline-primary mx-1" type="button" (click)="onEditCity(city)">
               <i class="fas fa-edit"></i>

@@ -1,6 +1,8 @@
+import {I_Country} from "../country/country.modal";
+
 export interface I_City {
   id: number;
   name: string;
   countryId: number;
-  country: string;
+  country: I_Country ;
 }
