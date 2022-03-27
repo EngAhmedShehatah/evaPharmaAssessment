@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CountryComponent} from "./country.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
+import { CountryListComponent } from './country-list/country-list.component';
+import { CountryAddComponent } from './country-add/country-add.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: CountryComponent
+    component: CountryListComponent
   }
 ]
 
 @NgModule({
   declarations: [
-    CountryComponent
+    CountryListComponent,
+    CountryAddComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "./shared/shared.module";
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {InterceptService} from "./services/intercept/intercept.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,13 @@ import { FullComponent } from './layouts/full/full.component';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="bg-light py-4">Countries</h3>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-12">
+      <button class="btn btn-primary d-block mb-2" type="button" (click)="onAddCountry()"
+              *ngIf="!showAddForm">add new country
+      </button>
+      <form [hidden]="!showAddForm" [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="name" class="form-control w-50">
+        <button class="btn btn-success py-2 px-4 mt-2 mx-1" type="submit">Save</button>
+        <button class="btn btn-danger py-2 px-4 mt-2 mx-1" type="button" (click)="onCancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+        <th class="py-2">#</th>
+        <th class="py-2">Name</th>
+        <th></th>
+        </thead>
+        <tbody>
+        <tr class="py-1" *ngFor="let country of countries; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{country.name}}</td>
+          <td>
+            <button class="btn btn-outline-primary mx-1" type="button" (click)="onEditCountry(country)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-outline-danger mx-1" type="button" (click)="onDeleteCountry(country)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        <tr class="py-2 text-center" *ngIf="countries.length == 0">
+          <td colspan="2">No Data Found</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

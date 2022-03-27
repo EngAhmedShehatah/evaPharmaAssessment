@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  domain = environment.domain;
 
   constructor(private http: HttpClient) { }
 
   login(data: {email: string, password: string}): Observable<any> {
-    return this.http.post<{token: string}>('https://taskfrontendapi.azurewebsites.net/api/user/login', data);
+    return this.http.post<{token: string}>(this.domain + 'user/login', data);
   }
 
   checkToken(): boolean {
