@@ -1,1 +1,59 @@
-<p>city-list works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="bg-light py-4">Cities</h3>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-12">
+      <button class="btn btn-primary d-block mb-2" type="button" (click)="onAddCity()"
+              *ngIf="!showAddForm">add new city
+      </button>
+      <form [hidden]="!showAddForm" [formGroup]="cityForm" (ngSubmit)="onSubmit()">
+        <p-dropdown [options]="countries" optionLabel="name" optionValue="id" [autoDisplayFirst]="false"
+                    styleClass="form-control w-50 mt-2 p-0" formControlName="countryId"></p-dropdown>
+        <small class="d-block text-danger" *ngIf="cityForm.dirty && cityForm.get('countryId')?.invalid">
+          ** country is required
+        </small>
+        <input type="text" formControlName="name" class="form-control w-50 mt-2">
+        <small class="d-block text-danger" *ngIf="cityForm.dirty && cityForm.get('name')?.invalid">
+          ** name is required
+        </small>
+        <button class="btn btn-success py-2 px-4 mt-2 mx-1" type="submit"
+                [disabled]="cityForm.invalid">Save
+        </button>
+        <button class="btn btn-danger py-2 px-4 mt-2 mx-1" type="button" (click)="onCancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+        <th class="py-2">#</th>
+        <th class="py-2">Name</th>
+        <th class="py-2">Country</th>
+        <th></th>
+        </thead>
+        <tbody>
+        <tr class="py-1" *ngFor="let city of cities; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{city.name}}</td>
+          <td>{{city.country}}</td>
+          <td>
+            <button class="btn btn-outline-primary mx-1" type="button" (click)="onEditCity(city)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-outline-danger mx-1" type="button" (click)="onDeleteCity(city)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        <tr class="py-2 text-center" *ngIf="cities.length == 0">
+          <td colspan="2">No Data Found</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
